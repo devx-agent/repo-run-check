@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repo Run Check: is this GitHub repo safe for my AI agent to run?</title>
+<meta name="description" content="Free check before Cursor, Claude Code or Codex runs a GitHub repo's install steps: flags iwr|iex and curl|sh one-liners, obfuscated payloads, malware domains, typosquatted crypto packages, agent prompt injection and fake stars.">
+<meta property="og:title" content="Crypto Link Check"><meta property="og:description" content="Is that MetaMask / Phantom / Ledger / exchange link real? Check it before you connect a wallet. Read-only. We never ask for keys.">
+<style>
+:root{--bg:#0b0d0c;--ink:#e9efe8;--mut:#8a958c;--line:#232a25;--acc:#c6ff3d;--red:#ff5a4e;--amb:#ffb13d;--ok:#5be39a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+.tag{font:12px ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.02;margin:14px 0 14px;letter-spacing:-.03em;font-weight:800}
+h1 em{font-style:normal;color:var(--acc)}
+p.lead{color:var(--mut);max-width:620px;margin:0 0 28px}
+form{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1;min-width:260px;background:#121614;border:1px solid var(--line);color:var(--ink);padding:15px 16px;border-radius:10px;font:15px ui-monospace,Menlo,monospace}
+input:focus{outline:none;border-color:var(--acc)}
+button{background:var(--acc);color:#0b0d0c;border:0;padding:15px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:wait}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:26px}
+.c{border:1px solid var(--line);border-radius:12px;padding:14px;background:#0f1311}
+.c b{display:block;font-size:14px}.c .s{font:12px ui-monospace,Menlo,monospace;color:var(--mut);word-break:break-all;margin-top:6px}
+.c.del{border-color:var(--amb)}.c.del b{color:var(--amb)}.c.err b{color:var(--mut)}
+.c.high{border-color:var(--red)}.c.high b{color:var(--red)}.c.low b{color:var(--ok)}
+.pill{display:inline-block;font:11px ui-monospace,monospace;padding:2px 8px;border-radius:99px;border:1px solid currentColor;margin-top:8px}
+.box{margin-top:22px;border:1px solid var(--line);border-radius:12px;padding:18px;background:#0f1311}
+.box h3{margin:0 0 6px;font-size:17px}.mut{color:var(--mut);font-size:14px}
+.f{font-size:14px;margin:6px 0;padding-left:12px;border-left:2px solid var(--line)}.f.danger{border-color:var(--red)}.f.warn{border-color:var(--amb)}
+pre{white-space:pre-wrap;word-break:break-all;font:12px ui-monospace,monospace;color:var(--mut);max-height:320px;overflow:auto}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:48px;border-top:1px solid var(--line);padding-top:28px}
+.how h4{margin:0 0 6px;font-size:15px}.how p{margin:0;color:var(--mut);font-size:14px}
+footer{margin-top:48px;color:var(--mut);font-size:13px}footer a{color:var(--ink)}
+code{font:13px ui-monospace,monospace;color:var(--acc)}
+.v{display:inline-block;font:12px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid currentColor}
+</style><link rel="canonical" href="https://repo-run-check.nextill-pos.workers.dev/"></head><body><div class="w">
+<div class="tag">ai coding agents · supply chain · crypto devs</div>
+<h1>Is this repo <em>safe</em> for my agent to run?</h1>
+<p class="lead">On Oct 29 researchers found a fake "Solana starter kit" with 287 stars whose README told AI coding agents to run one PowerShell line, which installed a remote-access trojan. Paste a GitHub repo before you or Cursor, Claude Code or Codex follow its setup steps. <b>Free README check.</b> Nothing is cloned or executed.</p>
+<form id="f"><input id="a" placeholder="github.com/owner/repo" autocomplete="off" spellcheck="false"><button id="go">Check free</button></form>
+<div id="out"></div>
+<div class="how">
+<div><h4>Free check</h4><p>Scans the README for download-and-execute one-liners (<code>iwr | iex</code>, <code>curl | sh</code> from unknown hosts), URLs built from string fragments, base64 payloads, known malware domains, password-protected archives and text aimed at AI agents. Also: <code>/api/command</code> to check any single command.</p></div>
+<div><h4>Full check · 0.005 USDC</h4><p>Adds <code>package.json</code> install scripts and typosquatted crypto dependencies, <code>install.sh</code>, <code>setup.py</code>, <code>.vscode/tasks.json</code> autorun tasks, Makefile, and GitHub signals: repo and owner age, stars vs forks/watchers, never-updated repos. 1-3 repos per report, USDC on Base, no gas.</p></div>
+<div><h4>For agents</h4><p><code>GET /api/basic?repo=</code> free JSON. <code>GET /v1/check?repo=a&amp;repo=b</code> via x402 v2. Remote MCP at <code>/mcp</code> with <code>check_repo</code> and <code>check_command</code>. See <a href="/openapi.json" style="color:var(--ink)">openapi.json</a>.</p></div>
+</div>
+<footer><a href="/is-this-github-repo-safe-to-run">How to tell if a GitHub repo is safe to run</a> · Also free: <a href="https://crypto-link-check.nextill-pos.workers.dev/">Crypto Link Check</a> · <a href="https://sweeper-check.nextill-pos.workers.dev/">7702 Sweeper Check</a> · Heuristics, not a guarantee: run untrusted code in a sandbox without wallet keys. <a href="https://github.com/devx-agent/repo-run-check">Source</a> · <a href="/terms">Terms</a> · Made by <a href="https://madebydevx.com">DevX</a> · payments go to <span style="font-family:ui-monospace,monospace">__PAYTO__</span></footer>
+</div>
+<script>
+const $=s=>document.querySelector(s),out=$("#out");let last="";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const short=a=>a?a.slice(0,8)+"…"+a.slice(-6):"";
+const COL={dangerous:"var(--red)",review_before_running:"var(--amb)",no_red_flags:"var(--ok)"};
+const LBL={dangerous:"dangerous: do not run",review_before_running:"review before running",no_red_flags:"no red flags"};
+const fl=fs=>fs.map(f=>'<div class="f '+(f.level==="info"?"info":f.level)+'">'+esc(f.message)+(f.evidence?'<br><code style="font-size:12px">'+esc(f.file)+(f.line?':'+f.line:'')+' '+esc(f.evidence)+'</code>':'')+'</div>').join("");
+$("#f").onsubmit=async e=>{e.preventDefault();const a=$("#a").value.trim();if(!a)return;
+$("#go").disabled=true;out.innerHTML='<div class="box mut">Checking…</div>';
+try{const r=await (await fetch("/api/basic?repo="+encodeURIComponent(a))).json();if(r.error)throw new Error(r.error);renderBasic(r)}catch(err){out.innerHTML='<div class="box">Error: '+esc(err.message)+'</div>'}$("#go").disabled=false};
+function renderBasic(r){last=r.repo;
+out.innerHTML='<div class="box"><span class="v" style="color:'+COL[r.verdict]+'">'+LBL[r.verdict]+'</span><h3 style="margin-top:10px">'+esc(r.repo)+'</h3><p class="mut">'+esc(r.advice)+'</p>'+fl(r.findings)+(r.install_commands&&r.install_commands.length?'<details><summary class="mut">install commands found in README ('+r.install_commands.length+')</summary><pre>'+esc(r.install_commands.join("\n"))+'</pre></details>':'')+'<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button id="pay">Full check · 0.005 USDC</button></div><p class="mut" id="pst" style="margin:8px 0 0">The free check reads only the README.</p></div>';$("#pay").onclick=payFull}
+const b64e=o=>btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(o))));
+const b64d=s=>JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0))));
+async function payFull(){const st=$("#pst"),btn=$("#pay");
+if(!window.ethereum){st.textContent="No browser wallet found. Install MetaMask/Coinbase Wallet/Rabby, or use the API with an x402 client.";return}
+btn.disabled=true;try{
+const u="/v1/check?repo="+encodeURIComponent(last);const r0=await fetch(u);const pr=b64d(r0.headers.get("PAYMENT-REQUIRED"));const a=pr.accepts[0];
+if(a.payTo.toLowerCase()!=="__PAYTO__".toLowerCase()||a.amount!=="5000")throw new Error("unexpected payment terms");
+st.textContent="Connect wallet…";const [from]=await ethereum.request({method:"eth_requestAccounts"});
+try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x2105"}]})}catch(e){throw new Error("Please switch your wallet to Base")}
+const now=Math.floor(Date.now()/1000),nonce="0x"+[...crypto.getRandomValues(new Uint8Array(32))].map(b=>b.toString(16).padStart(2,"0")).join("");
+const auth={from,to:a.payTo,value:a.amount,validAfter:String(now-60),validBefore:String(now+600),nonce};
+const typed={types:{EIP712Domain:[{name:"name",type:"string"},{name:"version",type:"string"},{name:"chainId",type:"uint256"},{name:"verifyingContract",type:"address"}],TransferWithAuthorization:[{name:"from",type:"address"},{name:"to",type:"address"},{name:"value",type:"uint256"},{name:"validAfter",type:"uint256"},{name:"validBefore",type:"uint256"},{name:"nonce",type:"bytes32"}]},primaryType:"TransferWithAuthorization",domain:{name:a.extra.name,version:a.extra.version,chainId:8453,verifyingContract:a.asset},message:auth};
+st.textContent="Sign the 0.005 USDC authorization in your wallet (no gas)…";
+const signature=await ethereum.request({method:"eth_signTypedData_v4",params:[from,JSON.stringify(typed)]});
+st.textContent="Checking & settling…";
+const r=await fetch(u,{headers:{"PAYMENT-SIGNATURE":b64e({x402Version:2,resource:pr.resource,accepted:a,payload:{signature,authorization:auth}})}});
+const j=await r.json();if(!r.ok)throw new Error(j.error||("HTTP "+r.status));renderFull(j)}catch(e){st.textContent="Not completed: "+(e.message||e)+" (you were not charged unless a tx hash is shown)";btn.disabled=false}}
+function renderFull(j){const r=j.reports[0];const m=r.repo_meta||{};
+let h='<div class="box"><span class="v" style="color:'+COL[r.verdict]+'">'+LBL[r.verdict]+'</span><h3 style="margin-top:10px">'+esc(r.repo)+'</h3><p class="mut">'+esc(r.advice)+'</p>'+fl(r.findings);
+h+='<p class="mut">Files checked: '+esc((r.files_checked||[]).join(", "))+(m.stars!=null?' · '+esc(m.stars)+' stars, '+esc(m.forks)+' forks · repo '+esc(m.age_days)+' days old'+(m.owner_age_days!=null?', owner '+esc(m.owner_age_days)+' days':''):(m.unavailable?' · '+esc(m.unavailable):''))+'</p>';
+h+='<p class="mut">Heuristics, not a guarantee.'+(j.payment&&j.payment.tx?' · Paid: <a style="color:var(--ink)" href="https://basescan.org/tx/'+esc(j.payment.tx)+'">'+esc(short(j.payment.tx))+'</a>':'')+'</p><details><summary class="mut">raw JSON</summary><pre>'+esc(JSON.stringify(j,null,1))+'</pre></details></div>';
+out.innerHTML=h}
+</script></body></html>

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.devx-agent/repo-run-check",
+  "title": "Repo Run Check",
+  "description": "Check GitHub repos and shell commands for malware-delivery tricks before an AI agent runs them",
+  "repository": { "url": "https://github.com/devx-agent/repo-run-check", "source": "github" },
+  "version": "1.0.0",
+  "websiteUrl": "https://repo-run-check.nextill-pos.workers.dev",
+  "packages": [ { "registryType": "npm", "identifier": "devx-repo-check", "version": "1.0.0", "transport": { "type": "stdio" }, "packageArguments": [ { "type": "positional", "value": "mcp" } ] } ],
+  "remotes": [ { "type": "streamable-http", "url": "https://repo-run-check.nextill-pos.workers.dev/mcp" } ]
+}

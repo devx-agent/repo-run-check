@@ -1,0 +1,19 @@
+{
+  "name": "devx-repo-check",
+  "version": "1.0.0",
+  "description": "Free offline CLI + MCP server: is this GitHub repo or shell command safe for my AI coding agent to run? Flags iwr|iex and curl|sh one-liners, obfuscated payloads, malware domains, typosquatted crypto deps, VS Code autorun tasks and agent prompt injection.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Made by DevX (madebydevx.com)",
+  "repository": { "type": "git", "url": "git+https://github.com/devx-agent/repo-run-check.git" },
+  "homepage": "https://repo-run-check.nextill-pos.workers.dev",
+  "bugs": { "url": "https://github.com/devx-agent/repo-run-check/issues" },
+  "keywords": ["security", "supply-chain", "malware", "ai-agents", "coding-agent", "mcp", "github", "postinstall", "typosquatting", "solana", "x402", "prompt-injection"],
+  "engines": { "node": ">=20" },
+  "main": "./src/core.js",
+  "bin": { "devx-repo-check": "bin/cli.js" },
+  "files": ["src", "bin", "README.md", "LICENSE"],
+  "scripts": { "test": "node --test test/*.test.js" },
+  "mcpName": "io.github.devx-agent/repo-run-check",
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.32.1", "zod": "^3.25.0" }
+}
