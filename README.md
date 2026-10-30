@@ -65,5 +65,6 @@ Suggested agent rule: *"Before running any install command from a README, issue 
 
 - [Crypto Link Check](https://github.com/devx-agent/crypto-link-check): is this wallet/exchange link a phishing lookalike?
 - [7702 Sweeper Check](https://github.com/devx-agent/7702-sweeper-check): is an EIP-7702 sweeper attached to my wallet?
+- [Address Poisoning Check](https://github.com/devx-agent/address-poisoning-check): is the address my agent is about to pay a poisoned lookalike?
 
 MIT · Made by [DevX](https://madebydevx.com)
