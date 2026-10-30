@@ -1,6 +1,6 @@
 {
   "name": "devx-repo-check",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Free offline CLI + MCP server: is this GitHub repo or shell command safe for my AI coding agent to run? Flags iwr|iex and curl|sh one-liners, obfuscated payloads, malware domains, typosquatted crypto deps, VS Code autorun tasks and agent prompt injection.",
   "type": "module",
   "license": "MIT",
