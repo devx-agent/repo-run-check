@@ -92,6 +92,7 @@ export default {
     if (p === "/mcp") return mcp(req, origin);
     if (p === "/.well-known/mcp.json" || p === "/.well-known/mcp/server-card.json") return J({ name: "devx-repo-run-check", description: "Check a GitHub repo or shell command for malware-delivery tricks before an AI agent runs it", url: origin + "/mcp", transport: "streamable-http", tools: ["check_repo", "check_command", "full_report_info"], provider: "Made by DevX", repository: "https://github.com/devx-agent/repo-run-check" });
     if (p === "/7541a0b5b97746152a11eba4520fb3fb.txt") return T("7541a0b5b97746152a11eba4520fb3fb");
+    if (p === "/.well-known/402index-verify.txt") return T("02de5dbaf2c08ed6fa1908bb92cbbc3a6dc7cc9096aef355438ede7d68016e49");
     if (p === "/health") return J({ ok: true, version: VERSION });
     if (p === "/api/basic") {
       const r = await basic(url.searchParams.get("repo") || ""); if (r.error) return J(r, 400);
