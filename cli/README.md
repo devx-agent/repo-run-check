@@ -7,7 +7,7 @@ On 29 Oct 2026 AIR Research Lab published [SolanaCry](https://www.air.security/b
 - **Free web check:** https://repo-run-check.nextill-pos.workers.dev
 - **Free, offline CLI + MCP server:** `npx devx-repo-check`
 - **Free API + remote MCP:** `GET /api/basic?repo=owner/repo`, `GET /api/command?cmd=...`, MCP at `/mcp`
-- **Paid full check (optional, 0.005 USDC via [x402](https://x402.org) on Base):** adds `package.json` install scripts and typosquatted deps, `install.sh`, `setup.py`, `.vscode/tasks.json` autorun, Makefile, and GitHub fake-star / new-owner signals. 1-3 repos per call.
+- **Paid full check (optional, 0.25 USDC via [x402](https://x402.org) on Base; HTTP route or paid MCP tool `full_report`):** adds `package.json` install scripts and typosquatted deps, `install.sh`, `setup.py`, `.vscode/tasks.json` autorun, Makefile, and GitHub fake-star / new-owner signals. 1-3 repos per call.
 
 Nothing is cloned, built or executed. Verdicts (`dangerous`, `review_before_running`, `no_red_flags`) are heuristics, not guarantees.
 
@@ -55,7 +55,7 @@ Suggested agent rule: *"Before running any install command from a README, issue 
 
 ## Paid API (x402)
 
-`GET https://repo-run-check.nextill-pos.workers.dev/v1/check?repo=owner/repo[&repo=...]` returns HTTP 402 with an x402 v2 `PAYMENT-REQUIRED` header (exact, `eip155:8453`, USDC, 5000 units = 0.005 USDC). Payment is settled only after the report is produced. [OpenAPI](https://repo-run-check.nextill-pos.workers.dev/openapi.json) · [Terms](https://repo-run-check.nextill-pos.workers.dev/terms)
+`GET https://repo-run-check.nextill-pos.workers.dev/v1/check?repo=owner/repo[&repo=...]` returns HTTP 402 with an x402 v2 `PAYMENT-REQUIRED` header (exact, `eip155:8453`, USDC, 250000 units = 0.25 USDC). Payment is settled only after the report is produced. [OpenAPI](https://repo-run-check.nextill-pos.workers.dev/openapi.json) · [Terms](https://repo-run-check.nextill-pos.workers.dev/terms)
 
 ## Guide
 

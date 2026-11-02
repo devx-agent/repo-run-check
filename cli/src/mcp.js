@@ -54,13 +54,13 @@ export function createServer(options = {}) {
     description: [
       "Fetches a public GitHub repo's README (raw.githubusercontent.com, up to 300 KB) and scans its install instructions before you clone it or follow them.",
       "Use it when a user or agent is told to 'clone this repo and run the setup' or is evaluating a starter kit, trading bot, wallet tool or MCP server from GitHub.",
-      "Free and read-only: one unauthenticated HTTPS request to GitHub; nothing is cloned or executed. Only the README is checked here. The optional paid hosted check (" + base + "/v1/check, 0.005 USDC via x402 on Base) also reads package.json install scripts, dependencies, setup files and repo metadata such as age and fake-star signals. This tool does not pay for it; it only returns its URL.",
+      "Free and read-only: one unauthenticated HTTPS request to GitHub; nothing is cloned or executed. Only the README is checked here. The optional paid hosted check (" + base + "/v1/check, 0.25 USDC via x402 on Base) also reads package.json install scripts, dependencies, setup files and repo metadata such as age and fake-star signals. This tool does not pay for it; it only returns its URL.",
       "Returns " + VERDICT_TEXT + ", plus repo, url, advice, files_checked, findings, install_commands, tier, full_report (URL of the paid check) and full_report_price_usdc. Errors if the repo is private, renamed or missing.",
       "If the repo is already cloned, check_local_repo covers more files at no cost.",
     ].join(" "),
     inputSchema: { repo: z.string().min(3).max(300).describe("Public GitHub repository as owner/repo or https://github.com/owner/repo (a trailing .git or path is fine). Other hosts are not supported.") },
     outputSchema: { repo: z.string(), url: z.string(), verdict: z.enum(VERDICTS), advice: z.string(), files_checked: z.array(z.string()), findings: z.array(finding), install_commands: z.array(z.string()), tier: z.string(), full_report: z.string(), full_report_price_usdc: z.number() },
     annotations: { ...RO, openWorldHint: true },
-  }, async ({ repo }) => { const r = await basic(repo); if (r.error) return { isError: true, content: [{ type: "text", text: r.error }] }; r.full_report = `${base}/v1/check?repo=${encodeURIComponent(r.repo)}`; r.full_report_price_usdc = 0.005; return out(r); });
+  }, async ({ repo }) => { const r = await basic(repo); if (r.error) return { isError: true, content: [{ type: "text", text: r.error }] }; r.full_report = `${base}/v1/check?repo=${encodeURIComponent(r.repo)}`; r.full_report_price_usdc = 0.25; return out(r); });
   return server;
 }
