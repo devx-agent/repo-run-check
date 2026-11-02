@@ -1,5 +1,12 @@
 # Changelog
 
+## Hosted service 1.2.1 (2026-11-02)
+
+- Paid full check is now 0.25 USDC (250000 units, USDC on Base, x402 v2 exact) per call of 1-3 repos, on `GET /v1/check` and on the new paid remote MCP tool `full_report` (x402 MCP transport: an unpaid call returns `PaymentRequired`; payment goes in `_meta["x402/payment"]`; it is settled only after every requested report is built).
+- The deep report also reads the git tree, agent/MCP configs, Claude hooks, devcontainer, build.rs, pyproject, `pull_request_target` workflows and committed binaries, and returns `risk_score` and `next_steps`.
+- `worker/src` and `shared/` now match the deployed Worker source.
+- CLI/stdio MCP: `check_repo` text and `full_report_price_usdc` now say 0.25 (unreleased; npm `devx-repo-check@1.1.0` still shows the old 0.005 text). Free checks are unchanged and stay free.
+
 ## 1.1.0 (2026-10-30)
 
 - The stdio MCP server (npm package, also what the Dockerfile runs) now registers its tools with `registerTool`, with a title, a longer description (what the tool does, when to use it and when not to, what it reads or sends, what it returns, limits), clearer parameter descriptions, a JSON output schema with `structuredContent`, and tool annotations (`readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`).

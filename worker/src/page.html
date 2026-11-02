@@ -39,7 +39,7 @@ code{font:13px ui-monospace,monospace;color:var(--acc)}
 <div id="out"></div>
 <div class="how">
 <div><h4>Free check</h4><p>Scans the README for download-and-execute one-liners (<code>iwr | iex</code>, <code>curl | sh</code> from unknown hosts), URLs built from string fragments, base64 payloads, known malware domains, password-protected archives and text aimed at AI agents. Also: <code>/api/command</code> to check any single command.</p></div>
-<div><h4>Full check · 0.005 USDC</h4><p>Adds <code>package.json</code> install scripts and typosquatted crypto dependencies, <code>install.sh</code>, <code>setup.py</code>, <code>.vscode/tasks.json</code> autorun tasks, Makefile, and GitHub signals: repo and owner age, stars vs forks/watchers, never-updated repos. 1-3 repos per report, USDC on Base, no gas.</p></div>
+<div><h4>Full check · 0.25 USDC</h4><p>Adds <code>package.json</code> install scripts and typosquatted crypto dependencies, <code>install.sh</code>, <code>setup.py</code>, <code>.vscode/tasks.json</code> autorun tasks, Makefile, and GitHub signals: repo and owner age, stars vs forks/watchers, never-updated repos. 1-3 repos per report, USDC on Base, no gas.</p></div>
 <div><h4>For agents</h4><p><code>GET /api/basic?repo=</code> free JSON. <code>GET /v1/check?repo=a&amp;repo=b</code> via x402 v2. Remote MCP at <code>/mcp</code> with <code>check_repo</code> and <code>check_command</code>. See <a href="/openapi.json" style="color:var(--ink)">openapi.json</a>.</p></div>
 </div>
 <footer><a href="/is-this-github-repo-safe-to-run">How to tell if a GitHub repo is safe to run</a> · Also free: <a href="https://crypto-link-check.nextill-pos.workers.dev/">Crypto Link Check</a> · <a href="https://sweeper-check.nextill-pos.workers.dev/">7702 Sweeper Check</a> · Heuristics, not a guarantee: run untrusted code in a sandbox without wallet keys. <a href="https://github.com/devx-agent/repo-run-check">Source</a> · <a href="/terms">Terms</a> · Made by <a href="https://madebydevx.com">DevX</a> · payments go to <span style="font-family:ui-monospace,monospace">__PAYTO__</span></footer>
@@ -55,20 +55,20 @@ $("#f").onsubmit=async e=>{e.preventDefault();const a=$("#a").value.trim();if(!a
 $("#go").disabled=true;out.innerHTML='<div class="box mut">Checking…</div>';
 try{const r=await (await fetch("/api/basic?repo="+encodeURIComponent(a))).json();if(r.error)throw new Error(r.error);renderBasic(r)}catch(err){out.innerHTML='<div class="box">Error: '+esc(err.message)+'</div>'}$("#go").disabled=false};
 function renderBasic(r){last=r.repo;
-out.innerHTML='<div class="box"><span class="v" style="color:'+COL[r.verdict]+'">'+LBL[r.verdict]+'</span><h3 style="margin-top:10px">'+esc(r.repo)+'</h3><p class="mut">'+esc(r.advice)+'</p>'+fl(r.findings)+(r.install_commands&&r.install_commands.length?'<details><summary class="mut">install commands found in README ('+r.install_commands.length+')</summary><pre>'+esc(r.install_commands.join("\n"))+'</pre></details>':'')+'<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button id="pay">Full check · 0.005 USDC</button></div><p class="mut" id="pst" style="margin:8px 0 0">The free check reads only the README.</p></div>';$("#pay").onclick=payFull}
+out.innerHTML='<div class="box"><span class="v" style="color:'+COL[r.verdict]+'">'+LBL[r.verdict]+'</span><h3 style="margin-top:10px">'+esc(r.repo)+'</h3><p class="mut">'+esc(r.advice)+'</p>'+fl(r.findings)+(r.install_commands&&r.install_commands.length?'<details><summary class="mut">install commands found in README ('+r.install_commands.length+')</summary><pre>'+esc(r.install_commands.join("\n"))+'</pre></details>':'')+'<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button id="pay">Full check · 0.25 USDC</button></div><p class="mut" id="pst" style="margin:8px 0 0">The free check reads only the README.</p></div>';$("#pay").onclick=payFull}
 const b64e=o=>btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(o))));
 const b64d=s=>JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0))));
 async function payFull(){const st=$("#pst"),btn=$("#pay");
 if(!window.ethereum){st.textContent="No browser wallet found. Install MetaMask/Coinbase Wallet/Rabby, or use the API with an x402 client.";return}
 btn.disabled=true;try{
 const u="/v1/check?repo="+encodeURIComponent(last);const r0=await fetch(u);const pr=b64d(r0.headers.get("PAYMENT-REQUIRED"));const a=pr.accepts[0];
-if(a.payTo.toLowerCase()!=="__PAYTO__".toLowerCase()||a.amount!=="5000")throw new Error("unexpected payment terms");
+if(a.payTo.toLowerCase()!=="__PAYTO__".toLowerCase()||a.amount!=="250000")throw new Error("unexpected payment terms");
 st.textContent="Connect wallet…";const [from]=await ethereum.request({method:"eth_requestAccounts"});
 try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x2105"}]})}catch(e){throw new Error("Please switch your wallet to Base")}
 const now=Math.floor(Date.now()/1000),nonce="0x"+[...crypto.getRandomValues(new Uint8Array(32))].map(b=>b.toString(16).padStart(2,"0")).join("");
 const auth={from,to:a.payTo,value:a.amount,validAfter:String(now-60),validBefore:String(now+600),nonce};
 const typed={types:{EIP712Domain:[{name:"name",type:"string"},{name:"version",type:"string"},{name:"chainId",type:"uint256"},{name:"verifyingContract",type:"address"}],TransferWithAuthorization:[{name:"from",type:"address"},{name:"to",type:"address"},{name:"value",type:"uint256"},{name:"validAfter",type:"uint256"},{name:"validBefore",type:"uint256"},{name:"nonce",type:"bytes32"}]},primaryType:"TransferWithAuthorization",domain:{name:a.extra.name,version:a.extra.version,chainId:8453,verifyingContract:a.asset},message:auth};
-st.textContent="Sign the 0.005 USDC authorization in your wallet (no gas)…";
+st.textContent="Sign the 0.25 USDC authorization in your wallet (no gas)…";
 const signature=await ethereum.request({method:"eth_signTypedData_v4",params:[from,JSON.stringify(typed)]});
 st.textContent="Checking & settling…";
 const r=await fetch(u,{headers:{"PAYMENT-SIGNATURE":b64e({x402Version:2,resource:pr.resource,accepted:a,payload:{signature,authorization:auth}})}});
