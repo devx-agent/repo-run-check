@@ -4,7 +4,7 @@ import { scanText, verdict, ADVICE } from "./core.js";
 import { basic } from "./net.js";
 import { scanDir, summarize } from "./local.js";
 export const DEFAULT_BASE = "https://repo-run-check.nextill-pos.workers.dev";
-export const VERSION = "1.1.0";
+export const VERSION = "1.1.1";
 const VERDICTS = ["no_red_flags", "review_before_running", "dangerous"];
 const finding = z.object({
   level: z.enum(["info", "warn", "danger"]), code: z.string().describe("machine-readable rule id, e.g. pipe_to_shell"), message: z.string(),

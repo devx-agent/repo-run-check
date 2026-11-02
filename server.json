@@ -4,8 +4,8 @@
   "title": "Repo Run Check",
   "description": "Check GitHub repos and shell commands for malware-delivery tricks before an AI agent runs them",
   "repository": { "url": "https://github.com/devx-agent/repo-run-check", "source": "github" },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://repo-run-check.nextill-pos.workers.dev",
-  "packages": [ { "registryType": "npm", "identifier": "devx-repo-check", "version": "1.1.0", "transport": { "type": "stdio" }, "packageArguments": [ { "type": "positional", "value": "mcp" } ] } ],
+  "packages": [ { "registryType": "npm", "identifier": "devx-repo-check", "version": "1.1.1", "transport": { "type": "stdio" }, "packageArguments": [ { "type": "positional", "value": "mcp" } ] } ],
   "remotes": [ { "type": "streamable-http", "url": "https://repo-run-check.nextill-pos.workers.dev/mcp" } ]
 }
